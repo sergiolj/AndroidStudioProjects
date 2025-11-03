@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.example.orbitsimulator.canvas.GeometryCanvas
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
@@ -32,25 +36,62 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintVertical_bias="1.0">
 
+        <TextView
+            android:id="@+id/tx_titlemenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:text="@string/controls"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tx_ctrlH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/double_margin"
+            android:text="@string/horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/sb_verticalscale"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tx_ctrlV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/double_margin"
+            android:text="@string/vertical"
+            app:layout_constraintBottom_toTopOf="@+id/sb_horizontalscale"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tx_ctrlS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/double_margin"
+            android:text="@string/speed"
+            app:layout_constraintBottom_toTopOf="@+id/sb_rotationvelocity"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <SeekBar
             android:id="@+id/sb_horizontalscale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteY="111dp" />
 
         <SeekBar
             android:id="@+id/sb_verticalscale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
-            app:layout_constraintBottom_toTopOf="@+id/sb_rotationvelocity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sb_horizontalscale" />
+            tools:layout_editor_absoluteY="58dp" />
 
         <SeekBar
             android:id="@+id/sb_rotationvelocity"
@@ -59,30 +100,34 @@
             android:layout_margin="@dimen/default_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:text="@string/start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.508" />
-
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:text="@string/stop"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/default_margin"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_start"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="@string/stop" />
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/start" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

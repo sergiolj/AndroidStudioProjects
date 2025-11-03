@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.orbitsimulator.canvas.GeometryCanvas;
 import com.example.orbitsimulator.geometry.Geometry;
 import com.example.orbitsimulator.geometry.SolidCircle;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar horizontalScale;
     private SeekBar verticalScale;
     private SeekBar rotationVelocity;
-    private GeometryCanvas canvas;
+    private GeometryCanvas canva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 geometry.boost(Float.valueOf(rotationVelocity.getProgress()) / 50);
                 geometry.setScaleX(Float.valueOf(horizontalScale.getProgress()) / 50);
                 geometry.setScaleY(Float.valueOf(verticalScale.getProgress()) / 50);
-                canvas.updateImage();
+                //canva.updateImage();
                 if (spinning) {
                     handler.postDelayed(this, 15);
                 }
