@@ -4,8 +4,8 @@ public class PolarCoord {
     private double radius;
     private double angle;
 
-    public PolarCoord(double r, double angle) {
-        this.radius = r;
+    public PolarCoord(double radius, double angle) {
+        this.radius = radius;
         this.angle = angle;
     }
     public PolarCoord(){

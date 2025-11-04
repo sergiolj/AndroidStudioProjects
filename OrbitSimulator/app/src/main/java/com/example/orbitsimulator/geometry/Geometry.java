@@ -20,14 +20,14 @@ public class Geometry {
      * Deste modo o arraylist aceita typos de elementos diferentes que implementarem
      * a interface ElementTypes
      */
-    private ArrayList<ElementTypes> geometrySet = new ArrayList<ElementTypes>();
+    private ArrayList<ElementTypes> geometrySet;
 
     // Deslocamento acumulado dos elementos em suas órbitas
     private double displacementSum;
 
     private double scaleX;
     private double scaleY;
-    private double dAngle;
+    private double dAngle = 0;
 
     private final Random rnd = new Random();
 
@@ -96,20 +96,63 @@ public class Geometry {
         this.scaleY = scaleY;
     }
 
+    public ArrayList<ElementTypes> getGeometrySet() {
+        return geometrySet;
+    }
+
     public ArrayList<ElementTypes> getGeometrySetIncrement(){
         ArrayList<ElementTypes> geometrySetNewPositions = new ArrayList<>();
-        for(ElementTypes element : this.geometrySet){
-            ElementTypes newElement = this.elementFactory.get();
+        if(this.elementFactory != null){
+                for(ElementTypes element : this.geometrySet){
+                    ElementTypes newElement = this.elementFactory.get();
+                    newElement.setColor(element.getColor());
 
-            newElement.setColor(element.getColor());
+                    PolarCoord oldPos = element.getPosition();
+                    double newAngle = oldPos.getAngle() + displacementSum/ oldPos.getRadius();
 
-            PolarCoord oldPos = element.getPosition();
-            double newAngle = oldPos.getAngle() + displacementSum/ oldPos.getRadius();
+                    newElement.setPosition(new PolarCoord(oldPos.getRadius(), newAngle));
 
-            newElement.setPosition(new PolarCoord(oldPos.getRadius(), newAngle));
-
-            geometrySetNewPositions.add(newElement);
+                    geometrySetNewPositions.add(newElement);
+                }
+        } else{
+            throw new RuntimeException("elementFactory não foi inicializado.");
         }
         return geometrySetNewPositions;
+    }
+
+    public static void setInstance(Geometry instance) {
+        Geometry.instance = instance;
+    }
+
+    public Supplier<ElementTypes> getElementFactory() {
+        return elementFactory;
+    }
+
+    public void setElementFactory(Supplier<ElementTypes> elementFactory) {
+        this.elementFactory = elementFactory;
+    }
+
+    public void setGeometrySet(ArrayList<ElementTypes> geometrySet) {
+        this.geometrySet = geometrySet;
+    }
+
+    public void setDisplacementSum(double displacementSum) {
+        this.displacementSum = displacementSum;
+    }
+
+    public double getdAngle() {
+        return dAngle;
+    }
+
+    public void setdAngle(double dAngle) {
+        this.dAngle = dAngle;
+    }
+
+    public Random getRnd() {
+        return rnd;
+    }
+
+    public double getDisplacementSum() {
+        return displacementSum;
     }
 }

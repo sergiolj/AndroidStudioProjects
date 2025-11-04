@@ -2,7 +2,8 @@ package com.example.orbitsimulator;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+import android.os.Looper;
+import android.widget.Button;
 import android.widget.SeekBar;
 
 import androidx.activity.EdgeToEdge;
@@ -36,29 +37,59 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        handler = new Handler(Looper.getMainLooper());
+
+        // Ligação das referências dos atributos na Activity
+        canva = findViewById(R.id.geometryCanvas);
+
+        horizontalScale = findViewById(R.id.sb_horizontalscale);
+        horizontalScale.setMin(1);
+        verticalScale = findViewById(R.id.sb_verticalscale);
+        verticalScale.setMin(1);
+        rotationVelocity = findViewById(R.id.sb_rotationvelocity);
+
+        Button btnStartBoost = findViewById(R.id.btn_start);
+        Button btnStop = findViewById(R.id.btn_stop);
+        Button btnExit = findViewById(R.id.btn_exit);
+
+        //Criação dos Arrays com os dados de geometria
         geometry = Geometry.getInstance();
+
         //Uso de method reference para passar uma Supplier, ou seja uma fábrica de uma determinada classe.
         geometry.populateGeometrySet(SolidCircle::new);
 
+        btnStartBoost.setOnClickListener(v ->{
+                spinning =  true;
+                beginTimer();
+        });
+        btnStop.setOnClickListener(v -> spinning=false);
 
+        btnExit.setOnClickListener(v -> {
+            if(handler != null){
+                handler.removeCallbacksAndMessages(null);
+            }
+            finish();
+        });
 
     }
-    public void onClickStop(View view){
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         spinning = false;
-    }
-    public void onClickStart(View view){
-        spinning =  true;
-        beginTimer();
+        if(handler != null){
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     private void beginTimer() {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                geometry.boost(Float.valueOf(rotationVelocity.getProgress()) / 50);
-                geometry.setScaleX(Float.valueOf(horizontalScale.getProgress()) / 50);
-                geometry.setScaleY(Float.valueOf(verticalScale.getProgress()) / 50);
-                //canva.updateImage();
+                geometry.boost((float) rotationVelocity.getProgress() / 50);
+                geometry.setScaleX((float) horizontalScale.getProgress() / 50);
+                geometry.setScaleY((float) verticalScale.getProgress() / 50);
+                canva.updateImage();
                 if (spinning) {
                     handler.postDelayed(this, 15);
                 }

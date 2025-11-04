@@ -6,12 +6,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.orbitsimulator.canvas.ProgressBar;
+import com.example.orbitsimulator.canvas.MyCustomProgressBar;
 import com.google.android.material.slider.Slider;
 
 public class CanvaProgressBar extends AppCompatActivity {
 
-    private ProgressBar circularProgressBar;
+    private MyCustomProgressBar circularProgressBar;
     private Slider slider;
     private TextView txSliderValue;
 

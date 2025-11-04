@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.example.orbitsimulator.canvas.ProgressBar
+    <com.example.orbitsimulator.canvas.MyCustomProgressBar
         android:id="@+id/custom_progress_bar_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

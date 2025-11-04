@@ -11,7 +11,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class ProgressBar extends View {
+public class MyCustomProgressBar extends View {
 
     //Variáveis necessárias para o desenho
     private Paint backgroundPaint; // O "pincel" para o círculo cinza
@@ -23,17 +23,17 @@ public class ProgressBar extends View {
     private int progress = 0;
 
 
-    public ProgressBar(Context context) {
+    public MyCustomProgressBar(Context context) {
         super(context);
         init(null);
     }
 
-    public ProgressBar(Context context, @Nullable AttributeSet attrs) {
+    public MyCustomProgressBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public ProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MyCustomProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
