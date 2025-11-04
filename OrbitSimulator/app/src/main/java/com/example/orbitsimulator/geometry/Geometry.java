@@ -12,9 +12,10 @@ public class Geometry {
 
     private Supplier<ElementTypes> elementFactory;
 
-    private static final int NUMBER_OF_ELEMENTS = 20;
-    private static final int NUMBER_OF_STRUCTURES = 10;
-    private static final double MAX_RADIUS = 400;
+    private static final int NUMBER_OF_ELEMENTS = 5;
+    private static final int NUMBER_OF_STRUCTURES = 25;
+    private static final double MAX_RADIUS = 1000;
+    private ColorRGB basePalette = new ColorRGB();
 
     /**
      * Deste modo o arraylist aceita typos de elementos diferentes que implementarem
@@ -65,15 +66,11 @@ public class Geometry {
                 angleTeta = (j - 1) * 2 * Math.PI / NUMBER_OF_ELEMENTS;
 
                 element.setPosition(new PolarCoord(radius,angleTeta));
-                element.setColor(new ColorRGB(rand(), rand(), rand()));
-
+                element.setColor(basePalette.genColor(basePalette,25));
                 this.geometrySet.add(element);
+
             }
         }
-    }
-
-    private int rand() {
-        return 100 + rnd.nextInt(156);
     }
 
     public void boost(double dC){
@@ -106,6 +103,7 @@ public class Geometry {
                 for(ElementTypes element : this.geometrySet){
                     ElementTypes newElement = this.elementFactory.get();
                     newElement.setColor(element.getColor());
+                    newElement.setSize(element.getSize());
 
                     PolarCoord oldPos = element.getPosition();
                     double newAngle = oldPos.getAngle() + displacementSum/ oldPos.getRadius();
@@ -148,11 +146,17 @@ public class Geometry {
         this.dAngle = dAngle;
     }
 
-    public Random getRnd() {
-        return rnd;
-    }
-
     public double getDisplacementSum() {
         return displacementSum;
     }
+
+    public ColorRGB getBasePalette() {
+        return basePalette;
+    }
+
+    public void setBasePalette(ColorRGB basePalette) {
+        this.basePalette = basePalette;
+    }
 }
+
+

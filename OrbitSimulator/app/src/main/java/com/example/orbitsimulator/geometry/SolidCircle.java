@@ -3,15 +3,20 @@ package com.example.orbitsimulator.geometry;
 import com.example.orbitsimulator.util.ColorRGB;
 import com.example.orbitsimulator.util.PolarCoord;
 
+import java.util.Random;
+
 public class SolidCircle implements ElementTypes {
     private int size;
     private ColorRGB color;
     private PolarCoord position;
+    private final int MIN_SIZE = 1;
+    private final int MAX_SIZE = 25;
+    private final Random rnd = new Random();
 
     public SolidCircle(){
         this.color = new ColorRGB();
         this.position = new PolarCoord();
-        this.size = 3; // default
+        this.size = genSize(); // default
     }
 
     public SolidCircle(SolidCircle c){
@@ -43,4 +48,10 @@ public class SolidCircle implements ElementTypes {
     public void setPosition(PolarCoord position) {
         this.position = position;
     }
+
+    @Override
+    public int genSize() {
+        return rnd.nextInt((MAX_SIZE-MIN_SIZE)+1)+MIN_SIZE;
+    }
+
 }

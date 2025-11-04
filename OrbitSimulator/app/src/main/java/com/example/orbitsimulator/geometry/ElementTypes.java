@@ -10,4 +10,6 @@ public interface ElementTypes {
     void setColor(ColorRGB color);
     PolarCoord getPosition();
     void setPosition(PolarCoord position);
+
+    int genSize();
 }

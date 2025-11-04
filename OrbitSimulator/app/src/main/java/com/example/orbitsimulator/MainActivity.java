@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.orbitsimulator.canvas.GeometryCanvas;
 import com.example.orbitsimulator.geometry.Geometry;
 import com.example.orbitsimulator.geometry.SolidCircle;
+import com.example.orbitsimulator.util.ColorRGB;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar verticalScale;
     private SeekBar rotationVelocity;
     private GeometryCanvas canva;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //Criação dos Arrays com os dados de geometria
         geometry = Geometry.getInstance();
 
+        geometry.setBasePalette(new ColorRGB(50,100,200));
         //Uso de method reference para passar uma Supplier, ou seja uma fábrica de uma determinada classe.
         geometry.populateGeometrySet(SolidCircle::new);
 
